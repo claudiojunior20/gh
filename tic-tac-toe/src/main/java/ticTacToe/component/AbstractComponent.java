@@ -6,30 +6,33 @@ import java.awt.Point;
 
 import ticTacToe.gui.Paintable;
 
-public class button implements Paintable{
-	
-	 private Point position= null;
-	 private Dimension  dimension= null;
+public abstract class AbstractComponent implements Paintable {
+	 protected Point position;
+	 protected Dimension  dimension;
+
 	 
 	 
-	 public button() {
+	 
+	 public AbstractComponent() {
       this.position = new Point(0,0);
       this.dimension = new Dimension(20,20);	 
 	 }
 	 
 	 
-	 public button(int x , int y) {
+	 public AbstractComponent(int x , int y) {
 	    this();
 	    setPosition(x, y);
 	 }
 	 
-	 public button(int x, int y, int width, int height) {
+	
+
+	public AbstractComponent(int x, int y, int width, int height) {
 		 this();
 		 setSize(width, height);
 		 
 	 }
-	 
-	 public void setPosition(int x, int y) {
+	
+	public void setPosition(int x, int y) {
 		 this.position = new Point (x , y);
 	 }
 	 
@@ -56,10 +59,16 @@ public class button implements Paintable{
 	 }
 
 
-	@Override
-	public void paint(Graphics g) {
-		g.drawRect(position.x, position.y, dimension.width, dimension.height);
-		
-	}
+	 public boolean isOver(Point point) {
+	 int xLeft = this.position.x;
+	 int yTop = this.position.y;
+	 int xRight = xLeft + this.width();
+	 int yBotton = yTop + this.height();
+
+	 return ( (point.x > xLeft && point.x < xRight) &&
+	 (point.y > yTop && point.y < yBotton) );
+	 }
 	 
+	
+
 }
