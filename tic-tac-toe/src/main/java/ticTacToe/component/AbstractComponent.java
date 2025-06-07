@@ -3,8 +3,11 @@ package ticTacToe.component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import ticTacToe.gui.Paintable;
+import ticTacToe.gui.util.MouseListenerAdapter;
 
 public abstract class AbstractComponent implements Paintable {
 	 protected Point position;
@@ -69,6 +72,19 @@ public abstract class AbstractComponent implements Paintable {
 	 (point.y > yTop && point.y < yBotton) );
 	 }
 	 
-	
+	 public MouseListener mouseListener() {
+		 return (MouseListener) new MouseListenerAdapter() {
+			 @Override
+			 public void mouseClicked(MouseEvent me) {
+			 if(!isOver(me.getPoint()))
+			 return;
+			 onMouseClick(me);
+		 }
+    };
+  }
+	 
+	 protected void onMouseClick(MouseEvent me) {
+		 dispatchButtonClickEvent(me);
+		}
 
 }
