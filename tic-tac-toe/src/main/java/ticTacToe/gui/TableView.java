@@ -11,6 +11,8 @@ import ticTacToe.model.Mark;
 import ticTacToe.model.table.ReadOnlyTableModel;
 
 public class TableView implements AbstractComponent{
+	
+
 	private ImageIcon icon = null;
 	private ImageIcon iconX, iconO;
 	
@@ -50,6 +52,7 @@ public class TableView implements AbstractComponent{
 			table[lin][col] = new ImageButton(x, y, cellWidth, cellHeight, null);
 				}
 		}
+		}
 			
   public void setIconX( ImageIcon icon ) {
 			this.iconX = icon;
@@ -71,19 +74,43 @@ public class TableView implements AbstractComponent{
 			}
 
 
+	private void paintChildren(Graphics g) {
+		
+		if(tableModel == null)
+			throw new RuntimeException("Error: TableModel is null at TableView!");
+	
+	    for(int lin=0; lin<table.length; lin++) {
+	    	for(int col=0; col<table[lin].length; col++) {
+	    		Mark mark = tableModel.getMark(lin,col);
+	    		table[lin][col].setImage(iconOf(mark));
+	    		table[lin][col].paint(g);
+	    	}
+	    }
+	}
+	
+	
+	
+	
+	
 	@Override
 	public void paint(Graphics g) {
 		
 		if(icon == null)
-			return;
+			throw new RuntimeException("Error: icon is null at TableView!");
 		
+		g.drawImage(icon.getImage(),
+				position.x, position.y,
+				width(),height(),null);
 		
-			int xLeft = position.x;
-			int yTop = position.y;
-			int width = dimension.width;
-			int height = dimension.height;
-			
-			g.drawImage(icon.getImage(), xLeft, yTop, width, height, null);
+		paintChildren(g);
 	}
+	
+
+
 
 }
+			
+		
+		
+
+
