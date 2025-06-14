@@ -74,4 +74,14 @@ public class AppTableModelTableViewTest {
 		 app.play();
 	 }
 	 
+	 public AppTableModelTableViewTest() {
+		 tableView.setTableModel(tableModel);
+		 
+		 ImageIcon icon = loadImage("background.jpg");
+		 window.setBackground(icon);
+		 Window.add(tableView);
+		 
+		 window.addMouseMotionListener(tableView.mouseMotionListener());
 }
+}
+

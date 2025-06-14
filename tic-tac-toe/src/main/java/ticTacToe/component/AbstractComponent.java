@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import ticTacToe.gui.Paintable;
 import ticTacToe.gui.util.MouseListenerAdapter;
@@ -83,8 +84,24 @@ public abstract class AbstractComponent implements Paintable {
     };
   }
 	 
+	 
+	 protected void onMouseMove(MouseEvent me) {
+		 /** The standard behavior is to do absolutely nothing */
+	 }
 	 protected void onMouseClick(MouseEvent me) {
 		 dispatchButtonClickEvent(me);
 		}
+	 
+	 public MouseMotionListener mouseMotionListener() {
+	     return new MouseMotionAdapter() 
+	    		
+	 @Override
+	   public void mouseMoved(MouseEvent me) {
+      	 mouseOver = isOver( me.getPoint());
+	           onMouseMove(me);
+	  {
+	 };
+	}
+
 
 }

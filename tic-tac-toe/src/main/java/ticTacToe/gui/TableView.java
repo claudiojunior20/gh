@@ -3,6 +3,7 @@ package ticTacToe.gui;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 
@@ -106,6 +107,16 @@ public class TableView implements AbstractComponent{
 	}
 	
 
+	@Override
+	protected void onMouseMove(MouseEvent me) {
+		
+	      for(int lin=0; lin<table.length; lin++) {
+	         for(int col=0; col<table[lin].length; col++) {
+
+	table[lin][col].mouseMotionListener().mouseMoved(me);
+   }
+  }
+ }
 
 
 }
